@@ -2,15 +2,15 @@ use std::io;
 
 //TODO abstract out the common parts
 pub fn ask_question() -> String {
-  let mut guess = String::new();
+  let mut article_name = String::new();
 
   println!("\nName of the blog article: ");
 
   io::stdin()
-    .read_line(&mut guess)
+    .read_line(&mut article_name)
     .expect("Failed to read line");
 
-  return guess;
+  return article_name;
 }
 
 pub fn confirm(guess: String) -> String {
