@@ -1,7 +1,7 @@
 use std::io;
 
 //TODO abstract out the common parts
-pub fn ask_question() -> String {
+pub fn get_article_name() -> String {
   let mut article_name = String::new();
 
   println!("\nName of the blog article: ");

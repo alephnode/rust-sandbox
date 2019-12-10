@@ -1,10 +1,11 @@
 mod io_pal;
+mod template_builder;
 
 fn main() {
-    let article_name = String::from(io_pal::ask_question());
+    let article_name = String::from(io_pal::get_article_name());
 
+    // TODO: write confirm handler
     io_pal::confirm(article_name);
 
-    // TODO: conditional based on response
-    println!("\nCool, I'll create that now ...");
+    template_builder::generate_template();
 }
