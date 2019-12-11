@@ -1,11 +1,11 @@
-mod io;
+mod reader;
 mod template;
 
 fn main() {
-    let article_name = String::from(io::get_article_name());
+    let article_name = String::from(reader::get_article_name());
 
     // TODO: write confirm handler
-    io::confirm(&article_name);
+    reader::confirm(&article_name);
 
     template::generate_template(&article_name);
 }
