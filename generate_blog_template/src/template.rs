@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::prelude::*;
 
-pub fn generate_template(name: &str) {
+pub fn generate(name: &str) {
   println!("Got it. Generating template now ...");
   create_file(&name).expect("Issue generating template.");
 }
