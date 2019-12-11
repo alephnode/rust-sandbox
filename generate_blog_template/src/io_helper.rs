@@ -1,29 +1,30 @@
 use std::io;
 
-//TODO abstract out the common parts
 pub fn get_article_name() -> String {
-  let mut article_name = String::new();
-
   println!("\nName of the blog article: ");
 
-  io::stdin()
-    .read_line(&mut article_name)
-    .expect("Failed to read line");
-
-  article_name.pop();
-
-  return article_name;
+  return format_name(handle_input());
 }
 
-pub fn confirm(guess: &str) -> String {
-  let mut confirmation = String::new();
-
-  println!("\nYou Typed: {}", guess);
+pub fn confirm(article_name: &str) -> String {
+  println!("\nYou Typed: {}", article_name);
   println!("\nConfirm: y/N:  ");
 
+  return handle_input();
+}
+
+fn handle_input() -> String {
+  let mut response = String::new();
+
   io::stdin()
-    .read_line(&mut confirmation)
+    .read_line(&mut response)
     .expect("Failed to read line");
 
-  return confirmation;
+  return response;
+}
+
+//TODO better formatting
+fn format_name(mut name: String) -> String {
+  name.pop();
+  return name;
 }

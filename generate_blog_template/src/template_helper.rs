@@ -1,5 +1,3 @@
-//TODO config to specify file path
-
 use std::fs::File;
 use std::io::prelude::*;
 
