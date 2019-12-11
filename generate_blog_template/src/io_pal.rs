@@ -10,10 +10,12 @@ pub fn get_article_name() -> String {
     .read_line(&mut article_name)
     .expect("Failed to read line");
 
+  article_name.pop();
+
   return article_name;
 }
 
-pub fn confirm(guess: String) -> String {
+pub fn confirm(guess: &str) -> String {
   let mut confirmation = String::new();
 
   println!("\nYou Typed: {}", guess);
