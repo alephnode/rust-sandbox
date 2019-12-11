@@ -1,11 +1,9 @@
 use std::fs::File;
 use std::io::prelude::*;
 
-pub fn generate_template(name: &str) -> u8 {
+pub fn generate_template(name: &str) {
   println!("Got it. Generating template now ...");
-  let result = create_file(&name);
-
-  return 1;
+  create_file(&name).expect("Issue generating template.");
 }
 
 fn create_file(name: &str) -> std::io::Result<()> {
