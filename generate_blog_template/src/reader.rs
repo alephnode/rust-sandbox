@@ -28,3 +28,13 @@ fn format_name(mut name: String) -> String {
   name.pop();
   return name;
 }
+
+#[cfg(test)]
+mod tests {
+  use super::*;
+
+  #[test]
+  fn format_name_works() {
+    assert_eq!("war", format_name(String::from("ward")))
+  }
+}
