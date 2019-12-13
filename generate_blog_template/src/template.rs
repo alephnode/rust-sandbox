@@ -17,3 +17,18 @@ fn create_file(name: &str) -> std::io::Result<()> {
   )?;
   Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+  use super::*;
+
+  #[test]
+  fn generate_works() {
+    assert_eq!((), generate("ward"))
+  }
+
+  #[test]
+  fn create_file_works() {
+    assert_eq!(true, create_file("ward").is_ok())
+  }
+}
