@@ -7,5 +7,5 @@ fn main() {
     // TODO: write confirm handler
     reader::confirm(&article_name, &article_title);
 
-    template::generate(&article_name);
+    template::generate(&article_name, &article_title);
 }

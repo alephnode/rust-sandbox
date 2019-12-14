@@ -2,19 +2,25 @@ use std::env;
 use std::fs;
 use std::io::prelude::*;
 
-pub fn generate(name: &str) {
+pub fn generate(name: &str, title: &str) {
   println!("Got it. Generating template now ...");
-  create_file(&name).expect("Issue generating template.");
+  create_file(&name, &title).expect("Issue generating template.");
 }
 
-fn create_file(name: &str) -> std::io::Result<()> {
+fn create_file(name: &str, title: &str) -> std::io::Result<()> {
   let filename = format!("{}.md", name);
   let mut file = fs::File::create(filename)?;
   file.write_all(
-    b"---
-  title: 'Title'
-  date: '2019-02-07'
-  ---",
+    format!(
+      "
+  ---
+  title: {}
+  date: '2019-02-08'
+  ---
+  ",
+      title
+    )
+    .as_bytes(),
   )?;
   Ok(())
 }
@@ -31,12 +37,7 @@ mod tests {
       "{}/test.md",
       project_dir.unwrap().to_str().unwrap().to_string()
     );
-    assert_eq!((), generate("test"));
+    assert_eq!((), generate("test", "test me"));
     assert_eq!(true, fs::metadata(path).is_ok());
-  }
-
-  #[test]
-  fn create_file_works() {
-    assert_eq!(true, create_file("ward").is_ok())
   }
 }
