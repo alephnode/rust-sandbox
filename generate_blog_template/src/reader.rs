@@ -1,7 +1,7 @@
 use std::io;
 
-pub fn get_article_name() -> String {
-  println!("\nName of the blog article: ");
+pub fn get_file_name() -> String {
+  println!("\nName of file: ");
 
   return format_name(handle_input());
 }

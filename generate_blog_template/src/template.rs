@@ -1,4 +1,5 @@
-use std::env;
+extern crate chrono;
+use chrono::{DateTime, Utc};
 use std::fs;
 use std::io::prelude::*;
 
@@ -9,16 +10,18 @@ pub fn generate(name: &str, title: &str) {
 
 fn create_file(name: &str, title: &str) -> std::io::Result<()> {
   let filename = format!("{}.md", name);
+  let now: DateTime<Utc> = Utc::now();
   let mut file = fs::File::create(filename)?;
   file.write_all(
     format!(
       "
   ---
   title: {}
-  date: '2019-02-08'
+  date: {}
   ---
   ",
-      title
+      title,
+      now.format("%b %e %Y")
     )
     .as_bytes(),
   )?;
@@ -28,6 +31,7 @@ fn create_file(name: &str, title: &str) -> std::io::Result<()> {
 #[cfg(test)]
 mod tests {
   use super::*;
+  use std::env;
 
   #[test]
   fn generate_works() {
