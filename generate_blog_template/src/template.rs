@@ -1,4 +1,5 @@
-use std::fs::File;
+use std::env;
+use std::fs;
 use std::io::prelude::*;
 
 pub fn generate(name: &str) {
@@ -8,7 +9,7 @@ pub fn generate(name: &str) {
 
 fn create_file(name: &str) -> std::io::Result<()> {
   let filename = format!("{}.md", name);
-  let mut file = File::create(filename)?;
+  let mut file = fs::File::create(filename)?;
   file.write_all(
     b"---
   title: 'Title'
@@ -24,7 +25,14 @@ mod tests {
 
   #[test]
   fn generate_works() {
-    assert_eq!((), generate("ward"))
+    let project_dir: Result<std::path::PathBuf, std::path::PathBuf> =
+      Ok(env::current_dir().expect("whoops"));
+    let path = format!(
+      "{}/test.md",
+      project_dir.unwrap().to_str().unwrap().to_string()
+    );
+    assert_eq!((), generate("test"));
+    assert_eq!(true, fs::metadata(path).is_ok());
   }
 
   #[test]
