@@ -1,15 +1,15 @@
 use std::io;
 
-pub fn get_file_name() -> String {
-  println!("\nName of file: ");
+pub fn handle_input() -> Vec<String> {
+  let article_name = String::from(get_file_name());
+  let article_title = String::from(get_article_title());
+  let mut res = confirm(&article_name, &article_title);
 
-  return format_name(handle_input());
-}
-
-pub fn get_article_title() -> String {
-  println!("\nName of the blog title: ");
-
-  return format_name(handle_input());
+  res.pop();
+  while res != "y" {
+    return handle_input();
+  }
+  vec![article_name, article_title]
 }
 
 pub fn confirm(article_name: &str, article_title: &str) -> String {
@@ -17,10 +17,22 @@ pub fn confirm(article_name: &str, article_title: &str) -> String {
   println!("\nArticle Title You Typed: {}", article_title);
   println!("\nConfirm: y/N:  ");
 
-  return handle_input();
+  return read_input();
 }
 
-fn handle_input() -> String {
+fn get_file_name() -> String {
+  println!("\nName of file: ");
+
+  return format_name(read_input());
+}
+
+fn get_article_title() -> String {
+  println!("\nName of the blog title: ");
+
+  return format_name(read_input());
+}
+
+fn read_input() -> String {
   let mut response = String::new();
 
   io::stdin()
