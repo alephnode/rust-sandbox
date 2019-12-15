@@ -63,6 +63,10 @@ mod tests {
     assert_eq!(
       "this-should-have-no-spaces",
       format_name(String::from("this should have no spaces\n"), true)
+    );
+    assert_eq!(
+      "this should have spaces",
+      format_name(String::from("this should have spaces\n"), false)
     )
   }
 }
