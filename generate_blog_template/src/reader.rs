@@ -15,13 +15,13 @@ pub fn handle_input() -> Vec<String> {
 fn get_file_name() -> String {
   println!("\nName of file: ");
 
-  return format_name(read_input());
+  format_name(read_input(), true)
 }
 
 fn get_article_title() -> String {
   println!("\nName of the blog title: ");
 
-  return format_name(read_input());
+  format_name(read_input(), false)
 }
 
 fn confirm(article_name: &str, article_title: &str) -> String {
@@ -29,7 +29,7 @@ fn confirm(article_name: &str, article_title: &str) -> String {
   println!("\nArticle Title You Typed: {}", article_title);
   println!("\nConfirm: y/N:  ");
 
-  return read_input();
+  read_input()
 }
 
 fn read_input() -> String {
@@ -39,12 +39,18 @@ fn read_input() -> String {
     .read_line(&mut response)
     .expect("Failed to read line");
 
-  return response;
+  response
 }
 
-fn format_name(mut name: String) -> String {
+// Research if there's a better pattern in Rust other than manually passing flag.
+// - no function overloading
+// - no default parameters
+fn format_name(mut name: String, strip: bool) -> String {
   name.pop();
-  return name.replace(" ", "-");
+  if strip {
+    name = name.replace(" ", "-");
+  }
+  name
 }
 
 #[cfg(test)]
@@ -53,10 +59,10 @@ mod tests {
 
   #[test]
   fn format_name_works() {
-    assert_eq!("war", format_name(String::from("ward")));
+    assert_eq!("war", format_name(String::from("ward"), false));
     assert_eq!(
       "this-should-have-no-spaces",
-      format_name(String::from("this should have no spaces\n"))
+      format_name(String::from("this should have no spaces\n"), true)
     )
   }
 }
