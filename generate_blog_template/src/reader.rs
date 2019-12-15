@@ -12,14 +12,6 @@ pub fn handle_input() -> Vec<String> {
   vec![article_name, article_title]
 }
 
-pub fn confirm(article_name: &str, article_title: &str) -> String {
-  println!("\nArticle Name You Typed: {}", article_name);
-  println!("\nArticle Title You Typed: {}", article_title);
-  println!("\nConfirm: y/N:  ");
-
-  return read_input();
-}
-
 fn get_file_name() -> String {
   println!("\nName of file: ");
 
@@ -32,6 +24,14 @@ fn get_article_title() -> String {
   return format_name(read_input());
 }
 
+fn confirm(article_name: &str, article_title: &str) -> String {
+  println!("\nArticle Name You Typed: {}", article_name);
+  println!("\nArticle Title You Typed: {}", article_title);
+  println!("\nConfirm: y/N:  ");
+
+  return read_input();
+}
+
 fn read_input() -> String {
   let mut response = String::new();
 
@@ -42,10 +42,9 @@ fn read_input() -> String {
   return response;
 }
 
-//TODO better formatting
 fn format_name(mut name: String) -> String {
   name.pop();
-  return name;
+  return name.replace(" ", "-");
 }
 
 #[cfg(test)]
@@ -54,6 +53,10 @@ mod tests {
 
   #[test]
   fn format_name_works() {
-    assert_eq!("war", format_name(String::from("ward")))
+    assert_eq!("war", format_name(String::from("ward")));
+    assert_eq!(
+      "this-should-have-no-spaces",
+      format_name(String::from("this should have no spaces\n"))
+    )
   }
 }
