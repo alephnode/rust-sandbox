@@ -1,6 +1,7 @@
 use std::io;
 
 pub fn handle_input() -> Vec<String> {
+  // Here I should make a check for cli args and return them if they're present
   let article_name = String::from(get_file_name());
   let article_title = String::from(get_article_title());
   let mut res = confirm(&article_name, &article_title);
@@ -53,6 +54,8 @@ fn format_name(mut name: String, strip: bool) -> String {
   name
 }
 
+// Write the test for checking input first
+// Also look how to test/mock fake cli args with rust (?)
 #[cfg(test)]
 mod tests {
   use super::*;
