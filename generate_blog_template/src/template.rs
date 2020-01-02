@@ -3,7 +3,7 @@ use chrono::{DateTime, Utc};
 use std::fs;
 use std::io::prelude::*;
 
-pub fn generate(article_info: &Vec<String>) {
+pub fn generate(article_info: Vec<String>) {
   let name = &article_info[0];
   let title = &article_info[1];
   println!("Got it. Generating template now ...");
@@ -44,7 +44,7 @@ mod tests {
       project_dir.unwrap().to_str().unwrap().to_string()
     );
     let example_article = vec!["test".to_string(), "test me".to_string()];
-    assert_eq!((), generate(&example_article));
+    assert_eq!((), generate(example_article));
     assert_eq!(true, fs::metadata(path).is_ok());
   }
 }
